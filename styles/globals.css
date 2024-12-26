@@ -19,3 +19,17 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+.ant-transfer-list {
+  width: 350px !important;
+}
+
+.ant-transfer-list-content-show-remove input {
+  pointer-events: none; /* Deshabilita la interacción */
+  opacity: 0.5
+}
+
+.ant-transfer .ant-transfer-list {
+  height: 450px !important;
+}
