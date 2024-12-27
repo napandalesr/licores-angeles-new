@@ -32,4 +32,5 @@ body {
 
 .ant-transfer .ant-transfer-list {
   height: 450px !important;
+  width: 35vw !important;
 }

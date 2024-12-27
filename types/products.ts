@@ -1,10 +1,11 @@
 export type ProductsType = {
   key: string
-  category: CATEGORY
+  category: string
   name: string
   content: string
   price: string
-  disabled: Boolean
+  stock: number
+  disabled: boolean
 }
 
 enum CATEGORY {

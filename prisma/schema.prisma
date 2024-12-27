@@ -38,6 +38,7 @@ model Client {
   name      String
   sale      Sale[]
   createdAt DateTime @default(now())
+  Box       Box[]
 }
 
 model Sale {
@@ -55,5 +56,7 @@ model Box {
   id        Int      @id @default(autoincrement())
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
+  client    Client   @relation(fields: [clientId], references: [id])
   userId    String
+  clientId  Int
 }

@@ -24,6 +24,7 @@
     "prisma": "^6.0.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-highlight-words": "^0.20.0",
     "react-loading": "^2.0.3"
   },
   "devDependencies": {
@@ -32,6 +33,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-highlight-words": "^0.20.0",
     "eslint": "^8",
     "eslint-config-next": "15.0.4",
     "postcss": "^8",

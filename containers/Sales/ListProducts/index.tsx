@@ -47,13 +47,13 @@ const ListProducts = ({ products }: props) => {
       <Transfer
         className='!w-full'
         dataSource={products}
-        titles={['Source', 'Target']}
+        titles={['Productos', 'Productos cargados']}
         targetKeys={targetKeys}
         selectedKeys={selectedKeys}
         onChange={handleChange}
         onSelectChange={handleSelectChange}
         onScroll={handleScroll}
-        render={(item) => <section><span className='w-1/2'>{item.name}:{item.content}</span> <InputNumber/></section>}
+        render={(item) => <section className='!w-full flex'><span className='!w-1/2 flex'>{item.name}:{item.content}</span> <InputNumber/></section>}
         oneWay
         style={{ marginBottom: 16 }}
       />

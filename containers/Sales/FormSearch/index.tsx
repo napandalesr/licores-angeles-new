@@ -1,9 +1,10 @@
 "use client"
 
 import React, { useState } from 'react';
-
 import { Input, Select } from 'antd';
 import type { GetProps } from 'antd';
+import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
+
 import ListProducts from '../ListProducts';
 import { useQueryProduct } from '@/hooks/queries/useQueryProduct';
 
@@ -11,71 +12,22 @@ type SearchProps = GetProps<typeof Input.Search>;
 
 const { Search } = Input;
 
-
-const productsInit = [
-  {
-    key: "1",
-    category: 'Cervezas',
-    name: 'Águila Light',
-    content: '330',
-    price: 4000,
-    disabled: false
-  },
-  {
-    key: "2",
-    category: 'Cervezas',
-    name: 'Águila Original',
-    content: '330',
-    price: 4000,
-    disabled: false
-  },
-  {
-    key: "3",
-    category: 'Cervezas',
-    name: 'Club',
-    content: '330',
-    price: 4000,
-    disabled: false
-  },
-  {
-    key: "4",
-    category: 'Cervezas',
-    name: 'Costeña bacana',
-    content: '330',
-    price: 4000,
-    disabled: false
-  },
-  {
-    key: "5",
-    category: 'Cervezas',
-    name: 'Corona',
-    content: '330',
-    price: 8000,
-    disabled: false
-  },
-  {
-    key: "6",
-    category: 'Cervezas',
-    name: 'Águila Light lata',
-    content: '330',
-    price: 4000,
-    disabled: false
-  },
-  {
-    key: "7",
-    category: 'Cervezas',
-    name: 'Águila Original lata',
-    content: '330',
-    price: 4000,
-    disabled: false
-  },
-]
-
 const FormSearch = () => {
   const [offset, setOffset] = useState(0);
-  const [limit] = useState(10);
+  const [limit, setLimit] = useState(10);
   const [search, setSearch] = useState("");
-  const { products, totalCount, loading } = useQueryProduct(search, limit, offset);
+  const { products, totalCount, loading } = useQueryProduct(search, limit, offset, `
+      totalCount
+      products {
+        key
+        category
+        name
+        content
+        price
+        stock
+        disabled
+      }
+    `);
   
   const onSearch: SearchProps['onSearch'] = (value, _e, info) => {
     setSearch(value);
@@ -102,6 +54,37 @@ const FormSearch = () => {
     </section>
     <section className='p-6 w-full border-2'>
       <ListProducts products={products}/>
+      <section className='flex gap-4'>
+        <ArrowLeftOutlined onClick={handlePrev} className={`border-2 p-2 rounded-lg ${Math.ceil(offset/limit+1) === 1 ? 'opacity-0 !cursor-default' : 'cursor-pointer'}`}/>
+        <p className='text-3xl'>
+          {
+            Math.ceil(offset/limit+1)
+          }
+          /
+          {
+            Math.ceil(totalCount/limit)
+          }
+        </p>
+        <ArrowRightOutlined onClick={handleNext} className={`border-2 p-2 rounded-lg ${Math.ceil(offset/limit+1) === Math.ceil(totalCount/limit) ? 'opacity-0 !cursor-default' : 'cursor-pointer'}`}/>
+        <Select onChange={e=>setLimit(e)} className='w-20 text-3xl' defaultValue={limit} options={[
+          {
+            value: 5,
+            label: <span>5</span>
+          },
+          {
+            value: 10,
+            label: <span>10</span>
+          },
+          {
+            value: 15,
+            label: <span>15</span>
+          },
+          {
+            value: 20,
+            label: <span>20</span>
+          },
+        ]}/>
+      </section>
     </section>
   </section>;
 }

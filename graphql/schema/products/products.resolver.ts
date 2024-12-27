@@ -15,6 +15,18 @@ type OutProduct = {
 export const productsResolvers = {
   Query: {
     findAllProducts: async (_: unknown, { offset = 0, limit = 10, search = "" }): Promise<OutProduct> => {
+      /*await prisma.client.create({
+        data: {
+          name: "Mesa 2",
+        }
+      })*/
+      const client = await prisma.client.findMany({
+        include: {
+          sale: true
+        }
+      })
+      console.log("client", client);
+      
       const totalCount = await prisma.product.count({
         where: {
           name: {
